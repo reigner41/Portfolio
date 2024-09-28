@@ -1,7 +1,8 @@
-PortfolioWithServer/.vs/
-PortfolioWithServer/Client/bin/
-PortfolioWithServer/Client/obj/
-PortfolioWithServer/Server/bin/
-PortfolioWithServer/Server/obj/
-PortfolioWithServer/Shared/obj/
-PortfolioWithServer/Shared/bin/
+.vs/
+Client/bin/
+Client/obj/
+Server/bin/
+Server/obj/
+Shared/obj/
+Shared/bin/
+.DS_Store
