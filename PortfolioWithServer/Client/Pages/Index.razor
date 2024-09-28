@@ -1,91 +1,67 @@
 ﻿@page "/"
-<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic|Open+Sans:300,400,500,700|Waiting+for+the+Sunrise|Shadows+Into+Light' rel='stylesheet' type='text/css'>
 
-<div class="wrapper clearfix">
-    <div class="left">
+@using PortfolioWithServer.Client.Components;
+@using PortfolioWithServer.Shared.Models;
+@using PortfolioWithServer.Client.Services;
 
-        <div class="name-hero">
+@inject ExperienceService experienceService
 
-            <div class="me-img"></div>
 
-            <div class="name-text">
+<MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
+    <MudText Typo="Typo.h2" Align="Align.Center" GutterBottom="true">Reigner Ouano</MudText>
+    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-8">Software Developer | .NET Enthusiast | Problem Solver</MudText>
 
-                <h1>Reigner Garcia Ouano</h1>
-                <p>Tarlac City, Philippines</p>
-                <p>Reigner41@gmail.com</p>
-                <p>(63) 976-031-8947</p>
 
-            </div>
+    <MudDivider Class="my-4" Color="Color.Grey" />
 
-        </div>
+    <MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray;">Professional Experience</MudText>
 
-    </div>
-    <div class="right">
+    <MudTimeline>
+        @foreach (var experience in experiences)
+        {
+            <MudTimelineItem>
+                <ExperienceCard Exp="experience" Index="experiences.IndexOf(experience)" />
+            </MudTimelineItem>
+        }
+    </MudTimeline>
 
-        <div class="inner">
-            <section>
-                <h1>Employment</h1>
-                <p>Nov 2022 - 2024 <em>Carbon Assets Solutions – API Blockchain Integration Specialist</em></p>
-                <p>Pioneered a class library for blockchain integration with Kaleido, handling smart contract setups and operations using Solidity.</p>
+    <MudDivider Class="my-8" />
 
-                <p>Dec 2022 - 2024 <em>ReproTech – Acumatica Developer/Consultant</em></p>
-                <p>Customized ERP software for clients, integrated Stripe and Docusign with Acumatica, and developed business logic with APIs.</p>
+    <MudText Typo="Typo.h4" Class="mb-4">Skills</MudText>
+    <MudPaper Class="pa-4 mb-8" Elevation="3">
+        <MudChipSet T="string">
+            <MudChip Color="Color.Primary">.NET Core</MudChip>
+            <MudChip Color="Color.Primary">C#</MudChip>
+            <MudChip Color="Color.Primary">Blazor</MudChip>
+            <MudChip Color="Color.Primary">Web3</MudChip>
+            <MudChip Color="Color.Primary">RESTful API</MudChip>
+            <MudChip Color="Color.Primary">Acumatica</MudChip>
+            <!-- Add more skills as needed -->
+        </MudChipSet>
+    </MudPaper>
 
-                <p>Nov 2022 - 2023 <em>Block-Trust – Full-Stack Developer</em></p>
-                <p>Developed .NET Core APIs, integrated Next.js for frontend, and implemented blockchain wallet creation with Web3 technologies.</p>
+    <MudText Typo="Typo.h4" Class="mb-4">Projects</MudText>
+    <MudGrid>
+        <MudItem xs="12" sm="6" md="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h5">Project 1</MudText>
+                    <MudText Typo="Typo.body2">Brief description of your project.</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <!-- Add more MudItem components for additional projects -->
+    </MudGrid>
+</MudContainer>
 
-                <p>Feb 2021 - 2023 <em>Asgard Alliance – Senior Software Developer</em></p>
-                <p>Created APIs and integrated Twilio and BigCommerce with Acumatica ERP, designed market-sold Asgard Label for Acumatica.</p>
+@code {
+    private List<Experience> experiences = new List<Experience>();
 
-                <p>Nov 2020 - 2022 <em>Greatway Financial – Senior Software Developer</em></p>
-                <p>Developed the Smart Mortgage platform using React.js, Node.js, and MySQL, managing backend and frontend development.</p>
-            </section>
-
-            <section>
-                <h1>Technical Skills</h1>
-                <ul class="skill-set">
-                    <li>Blockchain & Cryptography</li>
-                    <li>Full-Stack Development</li>
-                    <li>.NET Core</li>
-                    <li>Blazor</li>
-                    <li>React.js</li>
-                    <li>Acumatica ERP Customization</li>
-                    <li>RESTful APIs</li>
-                    <li>Web3</li>
-                    <li>Python</li>
-                </ul>
-            </section>
-
-            <section>
-                <h1>References</h1>
-                <p>William Grand | <em>Grand Interactive, llc. | CEO</em></p>
-                <p>(617) 448-0910 | wgrand@grandinteractive.com</p>
-
-                <p>Eric Chauvin | <em>PadMatcher Inc. | CEO</em></p>
-                <p>(617) 448-0910 | eric@padmatcher.com</p>
-
-                <p>Chris Heller | <em>Penrose Realty LLC. | Broker</em></p>
-                <p>(617) 794-4554 | chris@penroserealty.com</p>
-            </section>
-
-            <section>
-                <h1>Personal Interests</h1>
-                <ul class="skill-set">
-                    <li>Faith</li>
-                    <li>Biblical Studies</li>
-                    <li>Playing Guitar</li>
-                    <li>Song Writing</li>
-                    <li>Health & Nutrition</li>
-                    <li>Reading</li>
-                </ul>
-            </section>
-            <section>
-                <div class="handmade">
-                    <p>handmade by <em>Reigner Garcia Ouano</em></p>
-                </div>
-            </section>
-        </div>
-
-    </div>
-
-</div>
+    protected override async Task OnInitializedAsync()
+    {
+        experiences = await experienceService.GetExperiencesAsync();
+    }
+}
