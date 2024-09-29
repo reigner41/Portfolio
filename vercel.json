@@ -1,19 +1,19 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "Server/Program.cs",
-        "use": "@vercel/dotnet"
-      },
-      {
-        "src": "Client/wwwroot/**/*",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "Server/Program.cs",
+      "use": "@vercel/dotnet"
+    },
+    {
+      "src": "Client/wwwroot/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
