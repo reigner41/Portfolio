@@ -2,14 +2,18 @@
     "version": 2,
     "builds": [
       {
-        "src": "Server/**/*",
-        "use": "@vercel/node"
+        "src": "Server/Program.cs",
+        "use": "@vercel/dotnet"
+      },
+      {
+        "src": "Client/wwwroot/**/*",
+        "use": "@vercel/static"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "Server/$1"
+        "dest": "/index.html"
       }
     ]
   }
