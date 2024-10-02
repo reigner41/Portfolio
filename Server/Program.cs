@@ -28,9 +28,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapControllers();
+    // This line is crucial for SPA fallback
+    endpoints.MapFallbackToFile("index.html");
+});
 
-app.MapRazorPages();
-app.MapControllers();
-app.MapFallbackToFile("index.html");
+// app.MapRazorPages();
+// app.MapControllers();
+// app.MapFallbackToFile("index.html");
 
 app.Run();
