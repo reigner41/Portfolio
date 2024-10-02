@@ -1,0 +1,14 @@
+[build]
+  command = "dotnet publish -c Release -o publish"
+  publish = "publish/wwwroot"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/blazor"
+  status = 200
+
+[functions]
+  directory = "netlify/functions"
+
+[dev]
+  command = "dotnet watch run"
