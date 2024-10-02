@@ -28,11 +28,9 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "./Client" # Path to your Blazor WASM app
-          api_location: "Server" # Changed from "./Server" to "Server"
-          output_location: "wwwroot" # Built app content directory - optional
-          app_build_command: "dotnet publish -c Release"
-          api_build_command: "dotnet publish -c Release"
+          app_location: "Client"
+          api_location: "Api"
+          output_location: "wwwroot"
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
