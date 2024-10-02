@@ -24,11 +24,11 @@ jobs:
         with:
           dotnet-version: '6.0.x' # Adjust the .NET version as needed
       - name: Restore dependencies
-        run: dotnet restore ./Server/Server.csproj
+        run: dotnet restore ./Server/PortfolioWithServer.Server.csproj
       - name: Build
-        run: dotnet build --configuration Release ./Server/Server.csproj
+        run: dotnet build --configuration Release ./Server/PortfolioWithServer.Server.csproj
       - name: Publish
-        run: dotnet publish --configuration Release --output ./publish ./Server/Server.csproj
+        run: dotnet publish --configuration Release --output ./publish ./Server/PortfolioWithServer.Server.csproj
       - name: Deploy to Azure Static Web Apps
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
