@@ -12,6 +12,7 @@ namespace PortfolioWithServer.Controllers
         public ActionResult<List<Experience>> GetExperiences()
         {
             var experiences = ExperienceSeeder.GetExperiences();
+            Console.WriteLine(experiences);
             return Ok(experiences);
         }
     }
