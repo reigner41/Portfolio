@@ -8,13 +8,15 @@
 
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
-    <MudText Typo="Typo.h2" Align="Align.Center" GutterBottom="true">Reigner Ouano</MudText>
-    <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-8">Software Developer | .NET Enthusiast | Problem Solver</MudText>
+    <div class="mb-10">
+        <ContactInfo />
+    </div>
 
+    <MudDivider Class="my-4 mb-10" Color="Color.Grey" />
 
-    <MudDivider Class="my-4" Color="Color.Grey" />
-
-    <MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray;">Professional Experience</MudText>
+    <MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
+        Professional Experience
+    </MudText>
 
     <MudTimeline>
         @foreach (var experience in experiences)
