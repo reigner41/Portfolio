@@ -1,0 +1,36 @@
+@using PortfolioWithServer.Shared.Models
+
+<MudPaper Elevation="2" Class="pa-4 mb-5">
+    <MudText Typo="Typo.h6">@Exp?.Company</MudText>
+    <MudText Typo="Typo.subtitle2">@Exp?.Position</MudText>
+    <MudText Typo="Typo.body2" Class="mb-2">@Exp?.Duration</MudText>
+    <MudText Typo="Typo.body2" Class="mb-2">@Exp?.Location</MudText>
+    
+    <MudDivider Class="my-2" />
+    
+    <MudText Typo="Typo.subtitle2" Class="mb-2">Responsibilities:</MudText>
+    <MudList Dense="true" DisablePadding="true" Class="ml-4">
+        @foreach (var responsibility in Exp?.Responsibilities ?? Enumerable.Empty<string>())
+        {
+            <MudListItem Icon="@Icons.Material.Filled.CheckCircle" IconSize="Size.Small">
+                <MudText Typo="Typo.body2">@responsibility</MudText>
+            </MudListItem>
+        }
+    </MudList>
+    
+    <MudText Typo="Typo.subtitle2" Class="mt-4 mb-2">Technologies:</MudText>
+    <MudChipSet Class="mt-2" T="string">
+        @foreach (var tech in Exp?.Technologies ?? Enumerable.Empty<string>())
+        {
+            <MudChip Size="Size.Small" Color="Color.Primary" Variant="Variant.Outlined">@tech</MudChip>
+        }
+    </MudChipSet>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public Experience? Exp { get; set; }
+
+    [Parameter]
+    public int Index { get; set; }
+}

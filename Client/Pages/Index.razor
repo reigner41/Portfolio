@@ -3,9 +3,10 @@
 @using PortfolioWithServer.Client.Components;
 @using PortfolioWithServer.Shared.Models;
 @using PortfolioWithServer.Client.Services;
+@using PortfolioWithServer.Client.Components.Experience;
 
 @inject ExperienceService experienceService
-
+@inject IJSRuntime JSRuntime
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
     <div class="mb-10">
@@ -18,14 +19,25 @@
         Professional Experience
     </MudText>
 
-    <MudTimeline>
+    @if (DeviceType == "desktop") {
+        <MudTimeline>
+            @foreach (var experience in experiences)
+            {
+                <MudTimelineItem>
+                    <ExperienceCard Exp="experience" Index="experiences.IndexOf(experience)" />
+                </MudTimelineItem>
+            }
+        </MudTimeline>
+    }
+    else
+    {
         @foreach (var experience in experiences)
         {
-            <MudTimelineItem>
-                <ExperienceCard Exp="experience" Index="experiences.IndexOf(experience)" />
-            </MudTimelineItem>
+            <ExperienceCardMobile Exp="experience" Index="experiences.IndexOf(experience)" />
         }
-    </MudTimeline>
+    }
+
+
 
     <MudDivider Class="my-8" />
 
@@ -60,10 +72,15 @@
 </MudContainer>
 
 @code {
+    [Parameter]
+    public bool IsLoading { get; set; }
+
     private List<Experience> experiences = new List<Experience>();
+    private string DeviceType { get; set; } = "desktop";
 
     protected override async Task OnInitializedAsync()
     {
         experiences = await experienceService.GetExperiencesAsync();
+        DeviceType = await JSRuntime.InvokeAsync<string>("detectDeviceType");
     }
 }
