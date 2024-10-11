@@ -7,3 +7,4 @@ Shared/obj/
 Shared/bin/
 .DS_Store
 .vercel
+.idea/
