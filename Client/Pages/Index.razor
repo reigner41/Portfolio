@@ -4,6 +4,7 @@
 @using PortfolioWithServer.Shared.Models;
 @using PortfolioWithServer.Client.Services;
 @using PortfolioWithServer.Client.Components.Experience;
+@using PortfolioWithServer.Client.Components.Skills;
 
 @inject ExperienceService experienceService
 @inject IJSRuntime JSRuntime
@@ -37,38 +38,17 @@
         }
     }
 
+    <MudDivider Class="my-8" />
 
+    <SkillsComponent />
 
     <MudDivider Class="my-8" />
 
-    <MudText Typo="Typo.h4" Class="mb-4">Skills</MudText>
-    <MudPaper Class="pa-4 mb-8" Elevation="3">
-        <MudChipSet T="string">
-            <MudChip Color="Color.Primary">.NET Core</MudChip>
-            <MudChip Color="Color.Primary">C#</MudChip>
-            <MudChip Color="Color.Primary">Blazor</MudChip>
-            <MudChip Color="Color.Primary">Web3</MudChip>
-            <MudChip Color="Color.Primary">RESTful API</MudChip>
-            <MudChip Color="Color.Primary">Acumatica</MudChip>
-            <!-- Add more skills as needed -->
-        </MudChipSet>
+    <MudPaper Elevation="3" Class="pa-8 mt-8 text-center">
+        <MudIcon Icon="@Icons.Material.Filled.Construction" Color="Color.Primary" Size="Size.Large" Class="mb-4" />
+        <MudText Typo="Typo.h4" Class="mb-4">Projects Coming Soon!</MudText>
+        <MudText Typo="Typo.body1">As this is a project I work on in my free time, I'll be pushing exciting new showcases soon. Stay tuned!</MudText>
     </MudPaper>
-
-    <MudText Typo="Typo.h4" Class="mb-4">Projects</MudText>
-    <MudGrid>
-        <MudItem xs="12" sm="6" md="4">
-            <MudCard>
-                <MudCardContent>
-                    <MudText Typo="Typo.h5">Project 1</MudText>
-                    <MudText Typo="Typo.body2">Brief description of your project.</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <!-- Add more MudItem components for additional projects -->
-    </MudGrid>
 </MudContainer>
 
 @code {
