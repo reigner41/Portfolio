@@ -1,0 +1,43 @@
+@using PortfolioWithServer.Shared.Models
+@inject HttpClient HttpClient
+
+<MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">My Technical Toolkit</MudText>
+    @if (Skills == null)
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+    else
+    {
+        <MudGrid Justify="Justify.Center" Spacing="4">
+            @foreach (var skill in Skills.OrderByDescending(s => s.Proficiency))
+            {
+                <MudItem xs="6" sm="4" md="3" lg="2">
+                    <MudCard Elevation="3" Class="h-100">
+                        <MudCardContent>
+                            <div style="display: flex; justify-content: center; align-items: center; height: 100px;">
+                                <MudImage 
+                                    Src="@skill.GetImagePath()" 
+                                    Alt="@skill.Name"
+                                    ObjectFit="ObjectFit.Contain"
+                                    Height="80"
+                                    Width="80"
+                                    Class="mb-2" />
+                            </div>
+                            <MudText Typo="Typo.subtitle1" Align="Align.Center">@skill.Name</MudText>
+                            <MudProgressLinear Color="Color.Secondary" Value="@skill.Proficiency" Class="my-2" />
+                            <MudText Typo="Typo.caption" Align="Align.Center">@(Math.Round(skill.Proficiency / 10.0, 1)) / 10</MudText>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    }
+
+@code {
+    private List<Skill>? Skills { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Skills = await HttpClient.GetFromJsonAsync<List<Skill>>("api/Skill");
+    }
+}
