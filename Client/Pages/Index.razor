@@ -5,8 +5,10 @@
 @using PortfolioWithServer.Client.Services;
 @using PortfolioWithServer.Client.Components.Experience;
 @using PortfolioWithServer.Client.Components.Skills;
+@using PortfolioWithServer.Client.Components.Achievements;
 
 @inject ExperienceService experienceService
+@inject HttpClient Http
 @inject IJSRuntime JSRuntime
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
@@ -44,11 +46,28 @@
 
     <MudDivider Class="my-8" />
 
-    <MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
-        Education
+    <MudText Typo="Typo.h5" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
+        <MudIcon Icon="@Icons.Material.Filled.EmojiEvents" Color="Color.Warning" Size="Size.Large" Class="mr-2" />
+        Achievements
     </MudText>
 
-    <EducationComponent />
+    <MudGrid Justify="Justify.Center">
+        @if (Achievements.Count == 1)
+        {
+            <MudItem xs="12" sm="6" md="6" Class="d-flex justify-center">
+                <AchievementCard Achievement="Achievements[0]" />
+            </MudItem>
+        }
+        else
+        {
+            @foreach (var achievement in Achievements)
+            {
+                <MudItem xs="12" sm="6" md="6">
+                    <AchievementCard Achievement="achievement" />
+                </MudItem>
+            }
+        }
+    </MudGrid>
 
     <MudDivider Class="my-8" />
 
@@ -64,11 +83,13 @@
     public bool IsLoading { get; set; }
 
     private List<Experience> experiences = new List<Experience>();
+    private List<Achievement> Achievements = new List<Achievement>();
     private string DeviceType { get; set; } = "desktop";
 
     protected override async Task OnInitializedAsync()
     {
         experiences = await experienceService.GetExperiencesAsync();
+        Achievements = await Http.GetFromJsonAsync<List<Achievement>>("api/achievements");
         DeviceType = await JSRuntime.InvokeAsync<string>("detectDeviceType");
     }
 }

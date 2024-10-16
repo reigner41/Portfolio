@@ -1,0 +1,20 @@
+@using PortfolioWithServer.Shared.Models
+@inject IDialogService DialogService
+<MudPaper Class="d-flex flex-column align-items-center p-4" Style="width: 100%; height: 200px;">
+    <div Style="width: 200px; height: 150px; overflow: hidden; display: flex; justify-content: center; align-items: center;">
+        <MudImage Src="@Achievement.GetImagePath()" Alt="@Achievement.Title" Style="max-width: 100%; max-height: 100%; object-fit: contain;" />
+    </div>
+    <div class="d-flex flex-column justify-content-between" Style="flex-grow: 1; width: 100%; text-align: center;">
+        <div class="mb-3">
+            <MudText Typo="Typo.h6">@Achievement.ShortDescription</MudText>
+            <MudText Typo="Typo.body2" Color="Color.Dark">
+                @(Achievement.DateAchieved?.ToString("d") ?? "N/A")
+            </MudText>
+        </div>
+    </div>
+</MudPaper>
+
+@code {
+    [Parameter]
+    public Achievement Achievement { get; set; }
+}
