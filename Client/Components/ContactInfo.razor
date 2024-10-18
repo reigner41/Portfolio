@@ -1,6 +1,52 @@
-<MudText Typo="Typo.h2" Align="Align.Center" Style="font-weight: 600;">Reigner Garcia Ouano</MudText>
-<MudText Typo="Typo.body1" Align="Align.Center" Style="color: grey;">Contact Number: +639760318947</MudText>
-<MudText Typo="Typo.body1" Align="Align.Center" Style="color: grey;">Email: reigner41@gmail.com</MudText>
-<MudText Typo="Typo.body2" Align="Align.Center" Class="mt-2" Style="color: grey;">
-    A passionate developer who loves to create and innovate. This portfolio is a personal project where I showcase my ideas and projects that I work on during my free time.
-</MudText>
+@inject IJSRuntime JS
+
+<MudGrid>
+    <MudItem xs="12" sm="4" Class="d-flex justify-center align-center">
+        <MudAvatar Size="Size.Large" Style="width: 250px; height: 250px;">
+            <MudImage Src="/images/ContactInfo/red.jpeg" Alt="Reigner Garcia Ouano" ObjectFit="ObjectFit.Cover" Width="150" Height="150" Class="rounded-circle" />
+        </MudAvatar>
+    </MudItem>
+    <MudItem xs="12" sm="8">
+        <MudStack>
+            <MudText Typo="Typo.h4" Style="font-weight: 600;">Reigner Garcia Ouano</MudText>
+            <MudText Typo="Typo.body1" Style="color: var(--mud-palette-text-secondary);">
+                <MudIcon Icon="@Icons.Material.Filled.Phone" Size="Size.Small" Class="mr-2" />
+                +639760318947
+            </MudText>
+            <MudStack Row="true" Spacing="2">
+                <MudTooltip Text="Send Email">
+                    <MudIconButton Icon="@Icons.Material.Filled.Email" Color="Color.Default" OnClick="@OpenEmailClient" />
+                </MudTooltip>
+                <MudTooltip Text="Download Resume">
+                    <MudIconButton Icon="@Icons.Material.Filled.Description" Color="Color.Default" OnClick="@DownloadResume" />
+                </MudTooltip>
+                <MudTooltip Text="LinkedIn Profile">
+                    <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Default" Link="https://www.linkedin.com/in/reigner-ouano-4a7743190/" Target="_blank" />
+                </MudTooltip>
+                <MudTooltip Text="GitHub Profile">
+                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Default" Link="https://github.com/reigner41" Target="_blank" />
+                </MudTooltip>
+            </MudStack>
+            <MudText Typo="Typo.body2" Class="mt-2" Style="color: var(--mud-palette-text-secondary);">
+                Experienced full-stack developer with a passion for creating innovative solutions. Proficient in modern web technologies and eager to contribute to challenging projects. Open to new opportunities where I can leverage my skills to drive impactful results.
+            </MudText>
+        </MudStack>
+    </MudItem>
+</MudGrid>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await JS.InvokeVoidAsync("import", "./js/downloadHelper.js");
+    }
+
+    private async Task DownloadResume()
+    {
+        await JS.InvokeVoidAsync("downloadFile", "/document/reignerouano.pdf", "reignerouano.pdf");
+    }
+
+    private void OpenEmailClient()
+    {
+        JS.InvokeVoidAsync("open", $"mailto:reigner41@gmail.com");
+    }
+}
