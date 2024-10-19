@@ -14,17 +14,22 @@
                 +639760318947
             </MudText>
             <MudStack Row="true" Spacing="2">
-                <MudTooltip Text="Send Email">
+                <MudTooltip Text="Send Email to Reigner41@gmail.com">
                     <MudIconButton Icon="@Icons.Material.Filled.Email" Color="Color.Default" OnClick="@OpenEmailClient" />
                 </MudTooltip>
                 <MudTooltip Text="Download Resume">
                     <MudIconButton Icon="@Icons.Material.Filled.Description" Color="Color.Default" OnClick="@DownloadResume" />
                 </MudTooltip>
                 <MudTooltip Text="LinkedIn Profile">
-                    <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Default" Link="https://www.linkedin.com/in/reigner-ouano-4a7743190/" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Default" Href="https://www.linkedin.com/in/reigner-ouano-4a7743190/" Target="_blank" />
                 </MudTooltip>
                 <MudTooltip Text="GitHub Profile">
-                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Default" Link="https://github.com/reigner41" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Default" Href="https://github.com/reigner41" Target="_blank" />
+                </MudTooltip>
+                <MudTooltip Text="Medium Profile">
+                    <MudIconButton Color="Color.Default" Href="@MediumProfileUrl" Target="_blank">
+                        <i class="fab fa-medium" style="font-size: 24px;"></i>
+                    </MudIconButton>
                 </MudTooltip>
             </MudStack>
             <MudText Typo="Typo.body2" Class="mt-2" Style="color: var(--mud-palette-text-secondary);">
@@ -49,4 +54,6 @@
     {
         JS.InvokeVoidAsync("open", $"mailto:reigner41@gmail.com");
     }
+
+    private string MediumProfileUrl = "https://medium.com/@reigner41";
 }
