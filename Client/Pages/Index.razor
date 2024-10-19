@@ -11,63 +11,71 @@
 @inject HttpClient Http
 @inject IJSRuntime JSRuntime
 
+<FloatingNavigation Sections="@_sections" />
+
 <MudContainer MaxWidth="MaxWidth.Large" Class="mt-16">
-    <div class="mb-10">
+    <div id="contact" class="mb-10">
         <ContactInfo />
     </div>
 
     <MudDivider Class="my-4 mb-10" Color="Color.Grey" />
 
-    <MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
-        Professional Experience
-    </MudText>
+    <div id="experience">
+        <MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
+            Professional Experience
+        </MudText>
 
-    @if (DeviceType == "desktop") {
-        <MudTimeline>
-            @foreach (var experience in experiences)
-            {
-                <MudTimelineItem>
-                    <ExperienceCard Exp="experience" Index="experiences.IndexOf(experience)" />
-                </MudTimelineItem>
-            }
-        </MudTimeline>
-    }
-    else
-    {
-        @foreach (var experience in experiences)
-        {
-            <ExperienceCardMobile Exp="experience" Index="experiences.IndexOf(experience)" />
-        }
-    }
-
-    <MudDivider Class="my-8" />
-
-    <SkillsComponent />
-
-    <MudDivider Class="my-8" />
-
-    <MudText Typo="Typo.h5" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
-        <MudIcon Icon="@Icons.Material.Filled.EmojiEvents" Color="Color.Warning" Size="Size.Large" Class="mr-2" />
-        Achievements
-    </MudText>
-
-    <MudGrid Justify="Justify.Center">
-        @if (Achievements.Count == 1)
-        {
-            <MudItem xs="12" sm="6" md="6" Class="d-flex justify-center">
-                <AchievementCard Achievement="Achievements[0]" />
-            </MudItem>
+        @if (DeviceType == "desktop") {
+            <MudTimeline>
+                @foreach (var experience in experiences)
+                {
+                    <MudTimelineItem>
+                        <ExperienceCard Exp="experience" Index="experiences.IndexOf(experience)" />
+                    </MudTimelineItem>
+                }
+            </MudTimeline>
         }
         else
         {
-            @foreach (var achievement in Achievements)
+            @foreach (var experience in experiences)
             {
-                <MudItem xs="12" sm="6" md="6">
-                    <AchievementCard Achievement="achievement" />
-                </MudItem>
+                <ExperienceCardMobile Exp="experience" Index="experiences.IndexOf(experience)" />
             }
         }
-    </MudGrid>
+    </div>
+
+    <MudDivider Class="my-8" />
+
+    <div id="skills">
+        <SkillsComponent />
+    </div>
+
+    <MudDivider Class="my-8" />
+
+    <div id="achievements">
+        <MudText Typo="Typo.h5" Class="mb-4" Style="font-weight: bold; color: gray; text-align: center;">
+            <MudIcon Icon="@Icons.Material.Filled.EmojiEvents" Color="Color.Warning" Size="Size.Large" Class="mr-2" />
+            Achievements
+        </MudText>
+
+        <MudGrid Justify="Justify.Center">
+            @if (Achievements.Count == 1)
+            {
+                <MudItem xs="12" sm="6" md="6" Class="d-flex justify-center">
+                    <AchievementCard Achievement="Achievements[0]" />
+                </MudItem>
+            }
+            else
+            {
+                @foreach (var achievement in Achievements)
+                {
+                    <MudItem xs="12" sm="6" md="6">
+                        <AchievementCard Achievement="achievement" />
+                    </MudItem>
+                }
+            }
+        </MudGrid>
+    </div>
 
     <MudDivider Class="my-8" />
 
@@ -79,6 +87,15 @@
 </MudContainer>
 
 @code {
+    private Dictionary<string, string> _sections = new Dictionary<string, string>
+    {
+        {"contact", "Contact"},
+        {"experience", "Experience"},
+        {"skills", "Skills"},
+        {"achievements", "Achievements"},
+        {"projects", "Projects"}
+    };
+
     [Parameter]
     public bool IsLoading { get; set; }
 
